@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            font-family: 'Poppins', sans-serif;
+            background-attachment: fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+            position: relative;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            margin: 1rem;
+        }
+        .login-container h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #ced4da;
+            box-shadow: none;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus {
+            border-color: #6e8efb;
+            outline: none;
+            box-shadow: 0 0 0 0.2rem rgba(110, 129, 255, 0.25);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            width: 100%;
+            font-size: 1rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #5a73e3, #7d58e3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        .alert-custom {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .alert-custom.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .alert-custom.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .alert-custom.warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .alert-custom.closeable .btn-close {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: #000;
+            cursor: pointer;
+        }
+        .password-container {
+            position: relative;
+        }
+        .password-toggle {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            color: #6e8efb;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+        .password-toggle:hover {
+            color: #5a73e3;
+        }
+
+        @media (max-width: 576px) {
+            .login-container {
+                padding: 2rem 1.5rem;
+                max-width: 100%;
+                margin: 0;
+                border-radius: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2 class="text-center">Login</h2>
+        <!-- Flash message handling -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="alert-custom {{ messages[0][0] }} closeable">
+                    {{ messages[0][1] }}
+                    <button type="button" class="btn-close" aria-label="Close">&times;</button>
+                </div>
+            {% endif %}
+        {% endwith %}
+        <form method="post">
+            <div class="form-group">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" id="username" name="username" class="form-control" required>
+            </div>
+            <div class="form-group password-container">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+                <span class="password-toggle" id="togglePassword">&#x1F441;</span>
+            </div>
+            <button type="submit" class="btn-primary">Login</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordField = document.getElementById('password');
+
+            togglePassword.addEventListener('click', function () {
+                if (passwordField.type === 'password') {
+                    passwordField.type = 'text';
+                    togglePassword.textContent = '🙈';
+                } else {
+                    passwordField.type = 'password';
+                    togglePassword.textContent = '👁';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

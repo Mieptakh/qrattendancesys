@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan QR Code</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow-x: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #212529;
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            background-color: #343a40;
+            width: 100%;
+            position: relative;
+        }
+        .navbar-dark .navbar-brand {
+            color: #fff;
+            font-weight: 700;
+            margin-left: 10px;
+            text-decoration: none;
+        }
+        .navbar-brand img {
+            width: 40px;
+            vertical-align: middle;
+        }
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            font-size: 1.25rem;
+        }
+        .navbar-nav .nav-item {
+            list-style: none;
+        }
+        .nav-link {
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            display: block;
+            color: #fff;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: red;
+        }
+        .nav-link:focus, .nav-link:active {
+            color: #fff;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .mt-5 {
+            margin-top: 3rem;
+        }
+        .mb-4 {
+            margin-bottom: 1.5rem;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .text-muted {
+            color: #6c757d;
+        }
+        .text-justify {
+            text-align: justify;
+        }
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .btn-outline-primary {
+            background-color: transparent;
+            border: 1px solid #007bff;
+            color: #007bff;
+        }
+        .btn-outline-primary:hover {
+            background-color: #007bff;
+            color: white;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+        .scan-animation {
+            border: 2px solid #007bff;
+            padding: 10px;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+            background-color: #f8f9fa;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+        .scan-animation::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: rgba(0, 123, 255, 0.1);
+            animation: scan 2s linear infinite;
+        }
+        @keyframes scan {
+            0% { top: -100%; }
+            100% { top: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR START -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo"> Hoedda
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('generate') }}">Generate QR Code</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('scan') }}">Scan QR Code</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- NAVBAR END -->
+
+    <div class="container mt-5">
+        <div class="form-container text-center">
+            <h1 class="text-center mb-4">Scan QR Code</h1>
+            <div class="scan-animation text-center">
+                <form action="{{ url_for('scan') }}" method="post">
+                    <button type="submit" class="btn btn-primary">Start Scanning</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
