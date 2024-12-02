@@ -1,0 +1,7 @@
+flask
+flask-cors
+pandas
+qrcode
+pillow
+opencv-python
+pyzbar
